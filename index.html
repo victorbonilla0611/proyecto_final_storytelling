@@ -72,14 +72,25 @@
       to{ transform: skewX(-18deg) translateX(40%); opacity: 0; }
     }
 
-    header h1{
-      font-family:'Montserrat', sans-serif;
-      font-weight:700;
-      font-size:44px;
-      letter-spacing:1px;
-      text-transform:uppercase;
-      margin:0;
-    }
+header h1{
+  position:relative;
+}
+
+header h1::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:-12px;
+  width:0;
+  height:4px;
+  background:white;
+  animation: underlineGrow 1s ease forwards;
+}
+
+@keyframes underlineGrow{
+  to{ width:120px; }
+}
 
     header p{
       margin:10px 0 0;
@@ -102,20 +113,22 @@
     }
 
     /* Cards premium */
-    .card{
-      background: var(--gray);
-      padding:30px;
-      border-radius:16px;
-      margin-bottom:30px;
-      border:1px solid rgba(255,255,255,.06);
-      box-shadow: var(--shadow2);
-      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-    }
-    .card:hover{
-      transform: translateY(-4px);
-      border-color: rgba(225,6,0,.4);
-      box-shadow: var(--shadow), var(--glow);
-    }
+.card{
+  background: linear-gradient(145deg, rgba(26,26,26,.95), rgba(18,18,18,.85));
+  backdrop-filter: blur(10px);
+  padding:30px;
+  border-radius:18px;
+  margin-bottom:35px;
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow: var(--shadow2);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.card:hover{
+  transform: translateY(-6px);
+  border-color: rgba(225,6,0,.45);
+  box-shadow: var(--shadow), var(--glow);
+}
 
     /* Títulos con subrayado rojo */
     h2{
@@ -175,6 +188,25 @@
       header h1{ font-size:32px; }
       .dashboard-placeholder{ padding:40px 14px; }
     }
+
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:4px;
+  background: var(--f1-red);
+  z-index:999;
+  animation: raceStart 1.2s ease-out forwards;
+}
+
+@keyframes raceStart{
+  to{
+    left:100%;
+    opacity:0;
+  }
+}
   </style>
 </head>
 
