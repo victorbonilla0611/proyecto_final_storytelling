@@ -73,10 +73,6 @@
     }
 
 header h1{
-  position:relative;
-}
-
-header h1{
   margin:0;
   font-family:'Montserrat', sans-serif;
   font-weight:700;
@@ -85,7 +81,19 @@ header h1{
   text-transform:uppercase;
   position:relative;
 }
-
+    
+header h1::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:-12px;
+  width:0;
+  height:4px;
+  background:white;
+  animation: underlineGrow 1s ease forwards;
+}
+    
 .dash-frame{
   margin-top:16px;
   width:100%;
@@ -237,11 +245,25 @@ body::before{
 <body>
 
 <header>
-  <h1>Fórmula 1 - Dashboard Analítico</h1>
-  <p>Análisis dinámico de pilotos, escuderías y rendimiento por temporada</p>
+  <h1>Los Imperios de la Fórmula 1</h1>
+  <p>Poder, dominio tecnológico y las eras que marcaron la historia (1980–2025)</p>
 </header>
 
-<section>
+<section>   
+  <div class="card">
+  <h2>Contexto</h2>
+  <p>
+    La Fórmula 1 no es solo velocidad. Es una disputa constante por el poder tecnológico.
+    A lo largo de las últimas cuatro décadas, distintas escuderías han construido verdaderos imperios
+    deportivos basados en innovación, regulación estratégica y superioridad mecánica.
+  </p>
+  <p style="margin-top:15px;">
+    Este proyecto explora cómo surgen, se consolidan y eventualmente caen estas eras de dominio,
+    utilizando datos históricos de campeonatos de constructores y pilotos entre 1980 y 2025.
+    Más que observar quién ganó, buscamos entender los patrones que explican el poder y su transición.
+  </p>
+</div>
+  
   <div class="card">
     <h2>Objetivo del Proyecto</h2>
     <p>
@@ -260,6 +282,22 @@ body::before{
       <li>Consistencia por carrera</li>
     </ul>
   </div>
+
+  <div class="card">
+  <h2>Pregunta Central</h2>
+  <p>
+    ¿Cómo emergen y colapsan los imperios tecnológicos en la Fórmula 1?
+    ¿Existen patrones que expliquen la duración del dominio competitivo
+    y los momentos en que el poder cambia de manos?
+  </p>
+
+  <p style="margin-top:15px;">
+    Este tablero interactivo busca responder esa pregunta analizando
+    cuatro décadas de campeonatos, transiciones de reglamento
+    y concentración de victorias, permitiendo visualizar
+    cómo se construye — y cómo se pierde — el poder en la máxima categoría.
+  </p>
+</div>
 
 <div class="card">
   <h2>Dashboard Interactivo</h2>
