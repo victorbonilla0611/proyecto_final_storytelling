@@ -240,56 +240,102 @@ body::before{
   }
 }
 
-/* Accordion estilo F1 */
-
-.accordion{
+/* ===== Accordion por hover ===== */
+.accordion-hover{
   background: linear-gradient(145deg, rgba(26,26,26,.95), rgba(18,18,18,.85));
+  backdrop-filter: blur(10px);
   border-radius:18px;
   margin-bottom:25px;
-  padding:20px 25px;
+  padding:22px 25px;
   border:1px solid rgba(255,255,255,.06);
   box-shadow: var(--shadow2);
-  transition: all .25s ease;
+  transition: all .3s ease;
+  overflow:hidden;
 }
 
-.accordion:hover{
+.accordion-hover:hover{
   border-color: rgba(225,6,0,.45);
   box-shadow: var(--shadow), var(--glow);
+  transform: translateY(-4px);
 }
 
-.accordion summary{
+.accordion-title{
   font-family:'Montserrat', sans-serif;
   font-weight:600;
   font-size:20px;
   color: var(--f1-red);
-  cursor:pointer;
-  list-style:none;
   position:relative;
+  padding-right:30px;
+  cursor:default;
+  padding-bottom:10px;
 }
 
-.accordion summary::-webkit-details-marker{
-  display:none;
-}
-
-/* icono + */
-
-.accordion summary::after{
+.accordion-title::after{
   content:"+";
   position:absolute;
   right:0;
+  top:0;
   font-size:22px;
   color:var(--f1-red);
+  transition: transform .3s ease;
 }
 
-.accordion[open] summary::after{
+.accordion-hover:hover .accordion-title::after{
   content:"−";
 }
 
-.accordion p,
-.accordion ul{
+.accordion-title::before{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  height:3px;
+  width:62px;
+  background: var(--f1-red);
+  border-radius:999px;
+  box-shadow: 0 0 18px rgba(225,6,0,.25);
+}
+
+.accordion-content{
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition: max-height .45s ease, opacity .35s ease, margin-top .35s ease;
+  margin-top:0;
+}
+
+.accordion-hover:hover .accordion-content{
+  max-height:1000px;
+  opacity:1;
   margin-top:15px;
-  color: var(--muted);
-  line-height:1.6;
+}
+
+.accordion-content p,
+.accordion-content ul{
+  color:var(--muted);
+  line-height:1.65;
+  margin:0;
+}
+
+.accordion-content ul{
+  padding-left:20px;
+}
+
+.accordion-content li{
+  margin:6px 0;
+}
+
+/* En móvil mejor dejar todo abierto */
+@media (max-width: 768px){
+  .accordion-content{
+    max-height:1200px;
+    opacity:1;
+    margin-top:15px;
+  }
+
+  .accordion-title::after{
+    content:"";
+  }
 }
   </style>
 </head>
@@ -301,132 +347,141 @@ body::before{
   <p>Poder, dominio tecnológico y las eras que marcaron la historia (1980–2025)</p>
 </header>
 
-<section>   
-<details class="accordion" open>
-  <summary>Contexto</summary>
+<section>
 
-  <p>
-    La Fórmula 1 no es solo velocidad. Es una disputa constante por el poder tecnológico.
-    A lo largo de las últimas cuatro décadas, distintas escuderías han construido verdaderos
-    imperios deportivos basados en innovación, regulación estratégica y superioridad mecánica.
-  </p>
+  <div class="accordion-hover">
+    <div class="accordion-title">Contexto</div>
+    <div class="accordion-content">
+      <p>
+        La Fórmula 1 no es solo velocidad. Es una disputa constante por el poder tecnológico.
+        A lo largo de las últimas cuatro décadas, distintas escuderías han construido verdaderos imperios
+        deportivos basados en innovación, regulación estratégica y superioridad mecánica.
+      </p>
 
-  <p style="margin-top:15px;">
-    Este proyecto explora cómo surgen, se consolidan y eventualmente caen estas eras de dominio,
-    utilizando datos históricos de campeonatos de constructores y pilotos entre 1980 y 2025.
-    Más que observar quién ganó, buscamos entender los patrones que explican el poder y su transición.
-  </p>
+      <p style="margin-top:15px;">
+        Este proyecto explora cómo surgen, se consolidan y eventualmente caen estas eras de dominio,
+        utilizando datos históricos de campeonatos de constructores y pilotos entre 1980 y 2025.
+        Más que observar quién ganó, buscamos entender los patrones que explican el poder y su transición.
+      </p>
+    </div>
+  </div>
 
-</details>
-  
-  <div class="card">
-    <h2>Objetivo del Proyecto</h2>
-    <p>
-      Construir un tablero dinámico que permita analizar el desempeño histórico de la Fórmula 1,
-      identificando patrones de rendimiento por piloto, escudería y circuito.
-    </p>
+  <div class="accordion-hover">
+    <div class="accordion-title">Objetivo del Proyecto</div>
+    <div class="accordion-content">
+      <p>
+        Construir un tablero dinámico que permita analizar el desempeño histórico de la Fórmula 1,
+        identificando patrones de rendimiento por piloto, escudería y circuito.
+      </p>
+    </div>
+  </div>
+
+  <div class="accordion-hover">
+    <div class="accordion-title">Métricas que incluirá el tablero</div>
+    <div class="accordion-content">
+      <ul>
+        <li>Puntos acumulados por temporada</li>
+        <li>Victorias y podios</li>
+        <li>Rendimiento por circuito</li>
+        <li>Comparación entre pilotos</li>
+        <li>Consistencia por carrera</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion-hover">
+    <div class="accordion-title">Pregunta Central</div>
+    <div class="accordion-content">
+      <p>
+        ¿Cómo emergen y colapsan los imperios tecnológicos en la Fórmula 1?
+        ¿Existen patrones que expliquen la duración del dominio competitivo
+        y los momentos en que el poder cambia de manos?
+      </p>
+
+      <p style="margin-top:15px;">
+        Este tablero interactivo busca responder esa pregunta analizando
+        cuatro décadas de campeonatos, transiciones de reglamento
+        y concentración de victorias, permitiendo visualizar
+        cómo se construye — y cómo se pierde — el poder en la máxima categoría.
+      </p>
+    </div>
   </div>
 
   <div class="card">
-    <h2>Métricas que incluirá el tablero</h2>
-    <ul>
-      <li>Puntos acumulados por temporada</li>
-      <li>Victorias y podios</li>
-      <li>Rendimiento por circuito</li>
-      <li>Comparación entre pilotos</li>
-      <li>Consistencia por carrera</li>
-    </ul>
+    <h2>Dashboard Interactivo</h2>
+
+    <div class="dash-frame">
+      <iframe
+        src="https://bolidos-f-1-previo--fkdante.replit.app/"
+        title="Los Bólidos Analíticos - F1"
+        loading="lazy"
+        allowfullscreen
+      ></iframe>
+    </div>
   </div>
 
-  <div class="card">
-  <h2>Pregunta Central</h2>
-  <p>
-    ¿Cómo emergen y colapsan los imperios tecnológicos en la Fórmula 1?
-    ¿Existen patrones que expliquen la duración del dominio competitivo
-    y los momentos en que el poder cambia de manos?
-  </p>
+  <div class="accordion-hover">
+    <div class="accordion-title">Impacto Esperado</div>
+    <div class="accordion-content">
+      <p>
+        Este proyecto no solo analiza resultados deportivos, sino que revela
+        patrones estructurales de dominancia, transición y concentración del poder
+        en la Fórmula 1 entre 1980 y 2025.
+      </p>
 
-  <p style="margin-top:15px;">
-    Este tablero interactivo busca responder esa pregunta analizando
-    cuatro décadas de campeonatos, transiciones de reglamento
-    y concentración de victorias, permitiendo visualizar
-    cómo se construye — y cómo se pierde — el poder en la máxima categoría.
-  </p>
-</div>
+      <p style="margin-top:15px;">
+        A través del modelado y la visualización estratégica de datos históricos,
+        se identifican ciclos de supremacía tecnológica y momentos de ruptura
+        que explican cómo emergen y colapsan los imperios competitivos.
+      </p>
 
-<div class="card">
-  <h2>Dashboard Interactivo</h2>
-
-  <div class="dash-frame">
-    <iframe
-      src="https://bolidos-f-1-previo.replit.app/"
-      title="Los Bólidos Analíticos - F1"
-      loading="lazy"
-      allowfullscreen
-    ></iframe>
+      <p style="margin-top:15px;">
+        Más allá del automovilismo, este análisis demuestra cómo la analítica
+        puede utilizarse para estudiar dinámicas de poder en cualquier sistema
+        donde la innovación, la regulación y la competencia interactúan.
+      </p>
+    </div>
   </div>
-</div>
 
-<div class="card">
-  <h2>Impacto Esperado</h2>
+  <div class="accordion-hover">
+    <div class="accordion-title">Metodología y Datos</div>
+    <div class="accordion-content">
+      <p>
+        Los datos utilizados en este proyecto corresponden a registros históricos
+        de campeonatos de constructores y pilotos entre 1980 y 2025.
+        Se realizaron procesos de limpieza, validación y estructuración
+        para permitir el análisis de dominancia, transición de poder
+        y concentración de victorias por temporada.
+      </p>
 
-  <p>
-    Este proyecto no solo analiza resultados deportivos, sino que revela
-    patrones estructurales de dominancia, transición y concentración del poder
-    en la Fórmula 1 entre 1980 y 2025.
-  </p>
+      <p style="margin-top:15px;">
+        La estructura final del dataset permitió calcular métricas como:
+      </p>
 
-  <p style="margin-top:15px;">
-    A través del modelado y la visualización estratégica de datos históricos,
-    se identifican ciclos de supremacía tecnológica y momentos de ruptura
-    que explican cómo emergen y colapsan los imperios competitivos.
-  </p>
+      <ul>
+        <li>Diferencia de puntos entre 1° y 2° lugar</li>
+        <li>Porcentaje de victorias del campeón</li>
+        <li>Duración de eras dominantes</li>
+        <li>Equipos con múltiples campeonatos consecutivos</li>
+      </ul>
 
-  <p style="margin-top:15px;">
-    Más allá del automovilismo, este análisis demuestra cómo la analítica
-    puede utilizarse para estudiar dinámicas de poder en cualquier sistema
-    donde la innovación, la regulación y la competencia interactúan.
-  </p>
-</div>
+      <p style="margin-top:18px;">
+        📂 Archivos y datos originales disponibles en:
+      </p>
 
-  <div class="card">
-  <h2>Metodología y Datos</h2>
+      <p style="margin-top:10px;">
+        <a href="AQUI_TU_LINK" target="_blank"
+           style="color:var(--f1-red); font-weight:500; text-decoration:none;">
+           Ver repositorio de datos y modelado
+        </a>
+      </p>
+    </div>
+  </div>
 
-  <p>
-    Los datos utilizados en este proyecto corresponden a registros históricos
-    de campeonatos de constructores y pilotos entre 1980 y 2025.
-    Se realizaron procesos de limpieza, validación y estructuración
-    para permitir el análisis de dominancia, transición de poder
-    y concentración de victorias por temporada.
-  </p>
-
-  <p style="margin-top:15px;">
-    La estructura final del dataset permitió calcular métricas como:
-  </p>
-
-  <ul>
-    <li>Diferencia de puntos entre 1° y 2° lugar</li>
-    <li>Porcentaje de victorias del campeón</li>
-    <li>Duración de eras dominantes</li>
-    <li>Equipos con múltiples campeonatos consecutivos</li>
-  </ul>
-
-  <p style="margin-top:18px;">
-    📂 Archivos y datos originales disponibles en:
-  </p>
-
-  <p>
-    <a href="AQUI_TU_LINK" target="_blank"
-       style="color:var(--f1-red); font-weight:500; text-decoration:none;">
-       Ver repositorio de datos y modelado
-    </a>
-  </p>
-</div>
-  
 </section>
-
+  
 <footer>
-  Proyecto de Visualización y Storytelling · 2026 . Victor Bonilla - Luis Cortes - Frank Diaz
+  Proyecto de Visualización y Storytelling · 2026 · Victor Bonilla - Luis Cortes - Frank Diaz
 </footer>
 
 </body>
